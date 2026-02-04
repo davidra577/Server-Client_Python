@@ -1,0 +1,21 @@
+import socket
+
+def Main():
+    host = '127.0.0.1'
+    port = 55955
+
+    s = socket.socket()
+    s.connect((host, port))
+
+    message = input("->")
+    byte = message.encode()
+    while message != 'q':
+        s.send(byte)
+        data = s.recv(1024)
+        print('Received from server: ' + str(data.decode('utf-8')))
+        message = input("->")
+        byte = message.encode()
+    s.close()
+
+if __name__ == '__main__':
+    Main()
